@@ -6,4 +6,6 @@
       file: path=/root/newdir state=directory group=dada mode=0777 owner=dada recurse=yes 
     - name: Creating file
       file: path=/root/newdir/file10.txt state=touch
+    - name: Adding lines to newly crated file
+      copy: src=/root/file1.txt dest=/root/newdir/file10.txt
 
