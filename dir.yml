@@ -1,0 +1,6 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+    - name: Creating dir
+      file: path=/root/newdir state=directory
