@@ -1,0 +1,8 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+   - name: Stopping and disabling the MariaDB service
+     service: name=mariadb state=stopped enabled=no
+   - name: Un Installation of MariaDB packages
+     yum: name=mariadb-server update_cache=yes state=removed
