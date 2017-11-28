@@ -1,8 +1,8 @@
 ---
-- hosts: ansible
+- hosts: webservers
   become: yes
   tasks:
-    - name: install apache2
-      yum: name=httpd update_cache=yes state=latest
-    - name: starting apache2
-      service: name=httpd state=started enabled=yes            
+   - name: Installation apache
+     yum: name=httpd state=latest update_cache=yes
+   - name: restarting and enable the apache2
+     service: name=httpd state=started enabled=yes
