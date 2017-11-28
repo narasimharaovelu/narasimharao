@@ -1,0 +1,8 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+   - name: Installation of MariaDB packages
+     yum: name=mariadb-server update_cache=yes state=latest
+   - name: Starting the MariaDB service
+     service: name=mariadb state=started enabled=yes
