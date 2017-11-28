@@ -1,0 +1,8 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+   - name: stopping and disabling the apache2
+     service: name=httpd state=stopped enabled=no
+   - name: Un Installation apache
+     yum: name=httpd state=removed update_cache=yes
