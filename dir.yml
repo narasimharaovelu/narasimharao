@@ -3,4 +3,7 @@
   become: yes
   tasks:
     - name: Creating dir
-      file: path=/root/newdir state=directory
+      file: path=/root/newdir state=directory group=dada mode=0777 owner=dada recurse=yes 
+    - name: Creating file
+      file: path=/root/newdir/file10.txt state=touch
+
