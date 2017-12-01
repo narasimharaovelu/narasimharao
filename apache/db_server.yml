@@ -1,0 +1,18 @@
+---
+- hosts: dbservers
+  become: yes
+  tasks:
+    - name: Installation of mariadb-server in dbserver
+      yum: name=mariadb-server update_cache=yes state=latest
+    - name: Enable and starting the mariadb server service
+      service: name=mariadb state=started enabled=yes
+    - name: Disable firewall
+      service: name=firewalld state=stopped enabled=no
+    - name: Create Table in mariadb
+      command: mysql -e 'CREATE TABLE persons(name VARCHAR(50),email VARCHAR(50));' test
+    - name: Create User1 in Test table
+      command: mysql -e 'INSERT INTO persons VALUES("dada", "dada@dada.com");' test
+    - name: Create User2 in Test table
+      command: mysql -e 'INSERT INTO persons VALUES("Narasimharao", "narasimharao.v@gmail.com");' test 
+    - name: Grant permissions
+      command: mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;" test

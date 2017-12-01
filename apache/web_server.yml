@@ -1,0 +1,16 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+    - name: Installation of httpd in webserver
+      yum: name=httpd,php,php-mysql update_cache=yes state=latest
+    - name: Installation php in webserver
+      yum: name=php update_cache=yes state=latest
+    - name: Installation of php-mysql to connect to dbserver from webserver.
+      yum: name=php-mysql update_cache=yes state=latest
+    - name: Enabling and staring the httpd service in webserver3.
+      service: name=httpd state=started enabled=yes
+    - name: Disable firewalld.
+      service: name=firewalld state=stopped enabled=no
+    - name: Copying html files to /var/www/html/ location
+      copy: src=/root/narasimharao/apache/ dest=/var/www/html/  
